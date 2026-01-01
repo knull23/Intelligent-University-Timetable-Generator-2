@@ -1,115 +1,173 @@
-# University Timetable Scheduler
+# University Timetable Scheduler ✅
 
-This is a full-stack application designed to automate the creation of university timetables. It uses a genetic algorithm to find optimal schedules based on a set of constraints. The frontend is a modern web interface built with Next.js, and the backend is a powerful REST API powered by Django.
+**University Timetable Scheduler** is a full‑stack application that automates university timetable creation using a genetic algorithm. It includes a Next.js/React frontend and a Django REST backend with scheduling, management, and visualization tools.
 
-## Tech Stack
+---
 
-- **Frontend:**
-  - Next.js
-  - React
-  - TypeScript
-  - Tailwind CSS
-  - Axios
+## 🔧 Tech Stack
 
-- **Backend:**
-  - Django
-  - Django Rest Framework
-  - Python
-  - SQLite (default)
+- **Frontend:** Next.js, React, TypeScript, Tailwind CSS
+- **Backend:** Django, Django REST Framework, Python
+- **DB (dev):** SQLite
+- **Testing:** Jest (frontend), Django test runner (backend)
 
-## Features
+---
 
-- **Automated Timetable Generation:** The core feature of the application. It uses a genetic algorithm to generate conflict-free timetables.
-- **CRUD Operations:** Manage essential data like courses, instructors, rooms, and departments through a user-friendly interface.
-- **Authentication:** Secure user authentication using JWT.
-- **Dashboard:** A central dashboard to view statistics and manage the scheduling process.
-- **Fitness Progression:** Visualize the improvement of the genetic algorithm's solution over generations.
+## 🚀 Key Features
 
-## Getting Started
+- Automated timetable generation via a genetic algorithm
+- CRUD for Courses, Instructors, Rooms, Sections & Timetables
+- JWT-based authentication (DRF SimpleJWT)
+- Fitness progression visualization for algorithm convergence
+- Management commands for seeding meeting times and debugging the GA
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+---
+
+## ✅ Quick Start
 
 ### Prerequisites
 
-- Node.js and npm
-- Python and pip
+- Node.js (v18+ recommended) and npm
+- Python 3.10+ and pip
+- Optional: virtualenv
 
-### Backend Setup
+### Backend (Django)
 
-1.  **Navigate to the backend directory:**
-    ```bash
-    cd backend
-    ```
+1. Open a terminal and go to the backend folder:
 
-2.  **Create and activate a Python virtual environment:**
-    ```bash
-    # For Windows
-    python -m venv venv
-    .\venv\Scripts\activate
+   ```bash
+   cd backend
+   ```
 
-    # For macOS/Linux
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
+2. Create and activate a Python virtual environment:
 
-3.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+   Windows:
+   ```bash
+   python -m venv venv
+   .\\venv\\Scripts\\activate
+   ```
 
-4.  **Run database migrations:**
-    ```bash
-    python manage.py migrate
-    ```
+   macOS / Linux:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-5.  **Start the backend server:**
-    ```bash
-    python manage.py runserver
-    ```
-    The backend API will be available at `http://localhost:8000`.
+3. Install dependencies:
 
-### Frontend Setup
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-1.  **Navigate to the project root directory:**
-    ```bash
-    cd .. 
-    ```
+4. (Important) Apply database migrations:
 
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
+   ```bash
+   python manage.py migrate
+   ```
 
-3.  **Start the development server:**
-    ```bash
-    npm run dev
-    ```
-    The frontend will be accessible at `http://localhost:3000`.
+   ⚠️ If you encounter errors about missing columns (e.g., `no such column: scheduler_app_course.semester`), make sure all migrations are applied (`python manage.py showmigrations` then `python manage.py migrate`).
 
-## Project Structure
+5. (Optional) Create a superuser to access the admin:
 
-- **`/app`**: Contains the Next.js pages and layouts for the frontend application.
-- **`/backend`**: The Django project that houses the backend REST API and the genetic algorithm logic.
-  - **`/backend/scheduler_app`**: The main Django app containing models, views, and the core scheduling algorithm.
-- **`/components`**: Reusable React components used throughout the frontend.
-- **`/lib`**: Utility functions and API connection logic for the frontend.
+   ```bash
+   python manage.py createsuperuser
+   ```
 
-## API Endpoints
+6. Start the backend server:
 
-The backend exposes a REST API built with Django Rest Framework. The base URL for the API is `/api/`.
+   ```bash
+   python manage.py runserver
+   ```
 
-Some of the key endpoints include:
+The API base will be available at: `http://localhost:8000/api/`.
 
-- `/api/token/`: User authentication.
-- `/api/timetables/`: CRUD for timetables and triggering generation.
-- `/api/courses/`: CRUD for courses.
-- `/api/instructors/`: CRUD for instructors.
-- `/api/rooms/`: CRUD for rooms.
+### Frontend (Next.js)
 
-## Testing
+1. From project root:
 
-The frontend uses Jest for component testing. You can run the tests with:
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-```bash
-npm test
-```
+2. Open the frontend at `http://localhost:3000`.
+
+---
+
+## 🧪 Tests
+
+- Backend tests:
+
+  ```bash
+  # from backend/
+  python manage.py test
+  ```
+
+- Frontend tests (Jest):
+
+  ```bash
+  npm test
+  ```
+
+---
+
+## ⚙️ Useful Management Commands
+
+- Seed/generate meeting time slots:
+  - `python manage.py add_meeting_times`
+  - `python manage.py add_meeting_times_new`
+- Add curriculum or assign instructors:
+  - `python manage.py add_curriculum`
+  - `python manage.py assign_instructors_to_courses`
+- Debug genetic algorithm:
+  - `python manage.py debug_ga`
+
+---
+
+## 📡 API Overview
+
+Base URL: `http://localhost:8000/api/`
+
+Common endpoints:
+
+- `POST /api/token/` — obtain JWT tokens
+- `GET/POST /api/courses/`
+- `GET/POST /api/instructors/`
+- `GET/POST /api/rooms/`
+- `GET/POST /api/timetables/` (also triggers timetable generation in UI)
+
+(See the Django app `scheduler_app` for full serializer/view logic.)
+
+---
+
+## 🐞 Troubleshooting
+
+- Missing DB columns / 500 errors: run `python manage.py showmigrations` and `python manage.py migrate` to ensure all migrations are applied.
+- Static files warning in dev: ensure `backend/static` exists or update `STATICFILES_DIRS` in `scheduler/settings.py`.
+- If the frontend complains about API URLs, check `lib` utilities for API base settings or ensure backend is running on port 8000.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome — please open issues or pull requests. Quick tips:
+
+1. Fork and create a feature branch
+2. Run tests and ensure linting
+3. Keep changes small and well-documented
+
+---
+
+## 📄 License & Contact
+
+This repository does not declare a license file. If you want to add one, consider `MIT` or another permissive license.
+
+Maintainer: Project owner (use repo issues for contact)
+
+---
+
+If you'd like, I can also:
+- Add a concise `CONTRIBUTING.md` and `CODE_OF_CONDUCT.md`
+- Add a `LICENSE` file (e.g., MIT)
+
+Let me know what you'd like next! ✨
