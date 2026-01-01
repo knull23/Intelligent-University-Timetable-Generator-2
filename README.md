@@ -1,4 +1,4 @@
-# University Timetable Scheduler ✅
+# University Timetable Scheduler
 
 **University Timetable Scheduler** is a full‑stack application that automates university timetable creation using a genetic algorithm. It includes a Next.js/React frontend and a Django REST backend with scheduling, management, and visualization tools.
 
