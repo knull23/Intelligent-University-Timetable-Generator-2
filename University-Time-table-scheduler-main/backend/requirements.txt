@@ -1,14 +1,29 @@
 Django==4.2.7
 djangorestframework==3.14.0
 django-cors-headers==4.3.1
+
+# Auth
+djangorestframework-simplejwt==5.3.0
+
+# DB / ORM
 mongoengine==0.27.0
 pymongo==4.6.0
+django-rest-framework-mongoengine==3.4.1
+
+# Utils
 python-decouple==3.8
-djangorestframework-simplejwt==5.3.0
+django-filter==23.3
+tqdm
+Pillow==11.0.0
+
+# File exports
 reportlab==4.0.7
 openpyxl==3.1.2
-Pillow==11.0.0
-django-filter==23.3
-django-rest-framework-mongoengine==3.4.1
+
+# Production server & static handling (CRITICAL)
+gunicorn
+whitenoise
+dj-database-url
+
+# Compatibility
 setuptools<81
-tqdm
