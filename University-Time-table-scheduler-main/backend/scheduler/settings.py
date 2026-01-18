@@ -121,8 +121,9 @@ SIMPLE_JWT = {
 CORS_ALLOW_ALL_ORIGINS = True  # For dev only
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
-    ,  # React dev server
+    "http://localhost:3000",
+    "https://intelligent-university-timetable-ge.vercel.app",
+    # React dev server
 ]
 CORS_ALLOW_HEADERS = [
     'accept',
